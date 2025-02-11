@@ -1,3 +1,12 @@
+const db = localStorage;
+
+const data = db.getItem("list");
+
+const newData = JSON.parse(data);
+
+// null = 아무것도 없는 값  // object memory
+// undefied = 아무것도 없음
+
 // querySelector= HTML의 모든것을 선택할 수 잇음: 태그이름, 클래스명, 아이디명 모두 선택가능 선택할 때 css 규칙을 따라서 작성함
 // 예) class="newClass" => '.newClass'
 // id="newId" => '#id'
@@ -17,7 +26,7 @@
 // innerHTML = 해당 태그 안에 새로운 자식요소를 넣을 때 사용함
 // 자식요소는 태그들 문자열에 담아서 사용해도 되지만. 변수를 같이 사용하려면 ``사용해서 하면 개꿀.
 
-let list = [];
+let list = newData ?? []; //  ?? 앞에 조건이 만족되지 않을 때 안전빵으로 줄 초기값
 
 const rendering = () => {
   const ul = document.querySelector("ul");
@@ -82,6 +91,9 @@ form.addEventListener(
 
     // list.push()
     list.unshift(item);
+
+    console.log(list);
+    db.setItem("list", JSON.stringify(list));
 
     rendering();
 
